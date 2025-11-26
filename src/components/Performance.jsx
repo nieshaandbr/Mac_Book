@@ -14,17 +14,26 @@ const Performance = () => {
 
         const ctx = gsap.context(() => {
             // Text animation - runs on all devices
-            gsap.from('.content p', {
-                opacity: 0,
-                y: 20,
-                duration: 1,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: '.content',
-                    start: 'top 80%',
-                    toggleActions: 'play none none none'
-                }
-            });
+            const contentP = section.querySelector('.content p');
+            if (contentP) {
+                gsap.fromTo(contentP,
+                    {
+                        opacity: 0,
+                        y: 20
+                    },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: section.querySelector('.content'),
+                            start: 'top 80%',
+                            toggleActions: 'play none none none'
+                        }
+                    }
+                );
+            }
 
             // Desktop image timeline - only on screens ≥1024px
             const isDesktop = window.innerWidth >= 1024;
